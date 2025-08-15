@@ -9,6 +9,8 @@
 Lanciare la procedura con:
 
 ```bash
+sudo apt update
+sudo apt install -y curl ansible gpg
 bash <(curl -fsSL https://raw.githubusercontent.com/paspiz85/ansible-vault-editor/main/install.sh)
 ```
 

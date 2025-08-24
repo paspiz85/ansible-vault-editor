@@ -48,7 +48,7 @@ Per creare/modificare un file di secret:
 
 ```bash
 ansible-vault-editor -e "subl -w"
-ansible-vault-editor peppe inventory/prod/secrets/peppe.yml
+ansible-vault-editor peppe inventory/prod/host_vars/peppe/secrets.yml
 ```
 
 **ATTENZIONE**: su Windows va utilizzato esclusivamente da WSL quindi aprire una powershell:
@@ -56,7 +56,7 @@ ansible-vault-editor peppe inventory/prod/secrets/peppe.yml
 ```cmd
 wsl -d Debian
 ssh pi@peppe.local "sudo cat /etc/ansible-gitops/ansible-vault.key" | ansible-vault-editor -c peppe
-ansible-vault-editor peppe inventory/prod/secrets/peppe.yml
+ansible-vault-editor peppe inventory/prod/host_vars/peppe/secrets.yml
 ```
 
 Inoltre si consiglia di usare sempre nano poichè gli editor di Windows non permettono di accedere allo stesso file-system di WSL

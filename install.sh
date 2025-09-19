@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMAND="/usr/bin/ansible-vault-editor"
+COMMAND="/usr/local/bin/ansible-vault-editor"
 sudo tee "$COMMAND" >/dev/null <<EOF
 #!/bin/bash
 

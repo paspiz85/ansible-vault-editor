@@ -22,11 +22,11 @@ sudo apt update
 sudo apt install -y curl ansible gpg
 mkdir -p ~/.gnupg
 chmod 700 ~/.gnupg
-tee nano ~/.gnupg/gpg.conf > /dev/null <<EOF
+tee ~/.gnupg/gpg.conf > /dev/null <<EOF
 use-agent
 pinentry-mode loopback
 EOF
-tee nano ~/.gnupg/gpg-agent.conf > /dev/null <<EOF
+tee ~/.gnupg/gpg-agent.conf > /dev/null <<EOF
 allow-loopback-pinentry
 EOF
 gpgconf --kill gpg-agent

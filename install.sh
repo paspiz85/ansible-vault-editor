@@ -45,17 +45,17 @@ if [ "\$MODE" == "-c" ]; then
     TMP="\$(mktemp)"
     trap 'shred -u "\$TMP"' EXIT
     cat > "\$TMP"
-    cat "\$TMP" | gpg -c --yes --cipher-algo AES256 -o "\$KEYFILE"
+    gpg -c --yes --cipher-algo AES256 -o "\$KEYFILE" < "\$TMP"
   fi
   chmod 600 "\$KEYFILE"
   exit 0
 fi
 if [ "\$MODE" == "-e" ]; then
-  echo \$KEYNAME > "\$VAULTDIR/.editor"
+  echo "\$KEYNAME" > "\$VAULTDIR/.editor"
   exit 0
 fi
 if [ -f "\$VAULTDIR/.editor" ]; then
-  export EDITOR=\$(cat "\$VAULTDIR/.editor")
+  export EDITOR="\$(cat "\$VAULTDIR/.editor")"
 fi
 
 [[ -f "\$KEYFILE" ]] || { echo "Error: key '\$KEYNAME' not found" >&2; exit 1; }
@@ -63,9 +63,9 @@ fi
 FILE="\${2:-}"
 [[ -n "\$FILE" ]] || { echo "Error: missing <file>" >&2; usage; exit 1; }
 if [ -f "\$FILE" ]; then
-  ansible-vault edit --vault-id \$KEYNAME@<(gpg --quiet --decrypt \$KEYFILE) "\$FILE"
+  ansible-vault edit --vault-id "\$KEYNAME"@<(gpg --quiet --decrypt "\$KEYFILE") "\$FILE"
 else
-  ansible-vault create --vault-id \$KEYNAME@<(gpg --quiet --decrypt \$KEYFILE) "\$FILE"
+  ansible-vault create --vault-id "\$KEYNAME"@<(gpg --quiet --decrypt "\$KEYFILE") "\$FILE"
 fi
 EOF
 sudo chmod +x "$COMMAND"
